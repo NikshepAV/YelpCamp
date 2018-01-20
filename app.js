@@ -4,10 +4,10 @@ var express 		= require('express'),
 	mongoose 		= require('mongoose'),
 	seedDB			= require('./seeds'),
 	passport		= require('passport'),
-	LocalStrategy 	= require('passport-local'),
+	LocalStrategy 	= require('passport-local');
 
 
-var User 		= require('../models/user'),
+var User 		= require('./models/user'),
 	Campground 	= require('./models/campground'),
 	Comment 	= require('./models/comment');
 
