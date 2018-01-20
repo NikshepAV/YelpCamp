@@ -19,17 +19,29 @@
 					<p><%= campground.description %></p>
 				</div>
 			</div>
-			<div class="well">
-				<div class="text-right">
-					<a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">
-						Add new comment
-					</a>
-				</div>
+			<div class="well well-sm">
+				<form class="form-inline" action="/campgrounds/<%= campground._id %>/comments" method="POST">
+					<div class="form-group col-md-9">
+						<input type="text" name="comment[text]" placeholder="Type here" class="form-control" style="width: 100%;">
+					</div>
+					<div class="form-group">
+						<% if(!currentUser) { %>
+							<input type="hidden" name="comment[author]" value="">
+						<% } else { %>
+							<input type="hidden" name="comment[author]" value="<%= currentUser.username %>">
+						<% } %>
+					</div>
+					<div class="form-group text-right">
+						<button class="btn btn-success">
+							Add new comment
+						</button>
+					</div>
+				</form>
 				<hr/>
 				<% campground.comments.forEach(function(comment) { %>
 					<div class="row">
 						<div class="col-md-12">
-							<strong><%= comment.author %></strong>
+							<strong><%= comment.author.username %></strong>
 							<span class="pull-right">10 days ago</span>
 							<p>
 								<%= comment.text %>
@@ -41,10 +53,5 @@
 		</div>	
 	</div>
 </div>
-
-
-<p>
-	
-</p>
 
 <%  include ../partials/footer %>

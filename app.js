@@ -24,7 +24,8 @@ app.use(bodyPraser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
-seedDB();
+//seeding the database
+// seedDB();
 
 
 // PASSPORT CONFIGURATION
