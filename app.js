@@ -6,7 +6,8 @@ var express 		= require('express'),
 	seedDB			= require('./seeds'),
 	passport		= require('passport'),
 	LocalStrategy 	= require('passport-local'),
-	methodOverride	= require('method-override');
+	methodOverride	= require('method-override'),
+	flash 			= require('connect-flash');
 
 //requiring models
 var User 		= require('./models/user'),
@@ -25,6 +26,7 @@ app.use(bodyPraser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
+app.use(flash());
 
 //seeding the database
 // seedDB();
@@ -46,6 +48,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next) {
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash('error');
+	res.locals.success = req.flash('success');
 	next();
 });
 
