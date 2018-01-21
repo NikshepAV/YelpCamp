@@ -53,10 +53,19 @@ router.get('/:id', function(req, res) {
 	//find the campground with the provided ID
 	Campground.findById(req.params.id).populate('comments').exec(function(err, foundCampground) {
 		if(err) {
-			console.log(err);
+			req.flash('error', 'Something went wrong. Please try again.');
 		} else {
 			//render show template with associated compound
-			res.render('campgrounds/show', {campground: foundCampground});
+			Campground.find({}, function(err, allCampgrounds) {
+				if(err) {
+					req.flash('error', 'Something went wrong. Please try again.');
+				} else {
+					res.render('campgrounds/show', {
+						campground: foundCampground,
+						allCampgrounds: allCampgrounds
+					});
+				}
+			});
 		}
 	});
 });
