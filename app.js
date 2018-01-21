@@ -21,7 +21,7 @@ var	indexRoutes			= require('./routes/index'),
 	commentRoutes		= require('./routes/comments');
 
 //LOCAL MONGODB
-mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
+// mongoose.connect('mongodb://localhost/yelp_camp', {useMongoClient: true});
 
 //REMOTE MONGODB
 mongoose.connect('mongodb://nikshepav:password@ds211088.mlab.com:11088/yelp_camp', {useMongoClient:true});
@@ -63,9 +63,9 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 
 
 //LOCAL DEPLOYMENT
-app.listen(3000, function(req, res) {
-	console.log('YelpCamp server is online.....');
-});
+// app.listen(3000, function(req, res) {
+// 	console.log('YelpCamp server is online.....');
+// });
 
 //REMOTE DEPLOYMENT
-// app.listen(process.env.PORT, process.env.IP);
+app.listen(process.env.PORT, process.env.IP);
